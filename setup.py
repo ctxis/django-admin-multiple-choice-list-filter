@@ -12,18 +12,18 @@ setup(
     version='0.1',
     packages=find_packages(),
     include_package_data=True,
-    license='BSD License',  # example license
-    description='A simple Django app to conduct Web-based polls.',
+    license='BSD 2-Clause "Simplified" License',
+    description='A Django app to add a Multiple Choice List Filter to the admin interface.',
     long_description=README,
-    url='https://www.example.com/',
-    author='Your Name',
-    author_email='yourname@example.com',
+    url='https://github.com/ctxis/django-admin-multiple-choice-list-filter',
+    author='Patrick Heneghan',
+    author_email='git@discopatrick.me',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: X.Y',  # replace "X.Y" as appropriate
+        'Framework :: Django :: 2.0',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',  # example license
+        'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.5',
