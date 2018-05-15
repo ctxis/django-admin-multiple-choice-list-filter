@@ -9,15 +9,12 @@ to filter on multiple options.
 Getting started
 ---------------
 
-Install via pip:
-
-::
+Install via pip::
 
   pip install django-admin-multiple-choice-list-filter
 
-Add to INSTALLED_APPS in settings.py:
+Add to INSTALLED_APPS in settings.py::
 
-::
   # project/settings.py
 
   INSTALLED_APPS = [
@@ -25,9 +22,8 @@ Add to INSTALLED_APPS in settings.py:
       'django_admin_multiple_choice_list_filter',
   ]
 
-As an example, let's say you had a ``shop`` app. In that app you have an ``Order`` model with a ``status`` field that has limited choices:
+As an example, let's say you had a ``shop`` app. In that app you have an ``Order`` model with a ``status`` field that has limited choices::
 
-::
   # shop/models.py
 
   from django.db import models
@@ -50,9 +46,7 @@ As an example, let's say you had a ``shop`` app. In that app you have an ``Order
           default=Statuses.RECEIVED,
       )
 
-Then, in your app's admin.py:
-
-::
+Then, in your app's admin.py::
 
   # shop/admin.py
 
