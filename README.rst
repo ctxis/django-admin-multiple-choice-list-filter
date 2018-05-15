@@ -81,7 +81,7 @@ combination you like.
 You can override the default template in one of two ways.
 
 1. Override the template: https://docs.djangoproject.com/en/2.0/howto/overriding-templates/.
-The default template location is ``django_admin_multiple_choice_list_filter/filter.html``
+   The default template location is ``django_admin_multiple_choice_list_filter/filter.html``
 2. Set the template name in your subclass of MultipleChoiceListFilter, e.g.::
 
   # shop/admin.py
