@@ -16,7 +16,7 @@ class MultipleChoiceListFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if request.GET.get(self.parameter_name):
             kwargs = {self.parameter_name: request.GET[self.parameter_name].split(',')}
-            queryset = queryset.filter(**kwargs)
+            queryset = queryset.filter(**kwargs).distinct()
         return queryset
 
     def value_as_list(self):
