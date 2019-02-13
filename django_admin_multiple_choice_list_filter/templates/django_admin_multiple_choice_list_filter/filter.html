@@ -1,24 +1,54 @@
 {% load i18n %}
-<h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
-<ul class="mulitple-choice">
-{% for choice in choices %}
-    {% if choice.reset %}
-        <li{% if choice.selected %} class="selected"{% endif %}>
-            <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">{{ choice.display }}</a>
-        </li>
-    {% endif %}
-{% endfor %}
-{% for choice in choices %}
-    {% if not choice.reset %}
-        <li{% if choice.selected %} class="selected"{% endif %}>
-          <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}" style="display:inline">{{ choice.display }}</a>
-          {% if choice.selected and choice.exclude_query_string %}
-            <a class="small" href="{{ choice.exclude_query_string|iriencode }}" style="display:inline">(exclude)</a>
-          {% endif %}
-          {% if not choice.selected and choice.include_query_string %}
-            <a class="small" href="{{ choice.include_query_string|iriencode }}" style="display:inline">(include)</a>
-          {% endif %}
-        </li>
-    {% endif %}
-{% endfor %}
+{% now "u" as id_name %}
+
+<h3 style="margin-top:20px;">{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
+<script>
+    function searchFun{{id_name}}() {
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('myInput{{id_name}}');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUl{{id_name}}");
+        li = ul.getElementsByTagName('li');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+<input type="text" id="myInput{{ id_name }}" onkeyup="searchFun{{ id_name }}()" placeholder={% trans "Search" %}>
+<br>
+<ul id="myUl{{ id_name }}" class="mulitple-choice" style="height:200px; overflow:auto;">
+    {% for choice in choices %}
+        {% if choice.reset %}
+            <li{% if choice.selected %} class="selected"{% endif %}>
+                <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">{{ choice.display }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+    {% for choice in choices %}
+        {% if not choice.reset %}
+            <li{% if choice.selected %} class="selected"{% endif %}>
+                <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}"
+                   style="display:inline">{{ choice.display }}</a>
+                {% if choice.selected and choice.exclude_query_string %}
+                    <a class="small" href="{{ choice.exclude_query_string|iriencode }}" style="display:inline;"><b
+                            style="color:red; font-size:1.3rem;"> -</b></a>
+                {% endif %}
+                {% if not choice.selected and choice.include_query_string %}
+                    <a class="small" href="{{ choice.include_query_string|iriencode }}" style="display:inline"><b
+                            style="color:green; font-size:1.3rem;"> +</b></a>
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
 </ul>
+
